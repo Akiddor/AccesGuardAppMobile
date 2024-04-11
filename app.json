@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "AccesGuard-Login-blur",
-    "slug": "AccesGuard-Login-blur",
+    "name": "accesguard",
+    "slug": "accesguard",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,21 +15,24 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.akiddor.accesguard"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.akiddor.accesguard"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "tu-project-id"
+        "projectId": "6e228173-4203-4f3f-b35d-f73b866a0733"
       }
-    }
+    },
+    "owner": "akiddor"
   }
 }

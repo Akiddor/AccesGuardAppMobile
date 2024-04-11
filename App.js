@@ -1,18 +1,16 @@
-import React from "react";
-import { StyleSheet, Image, Text, View, ScrollView, TouchableOpacity, TextInput,Alert } from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, Image, Text, View, ScrollView, TouchableOpacity, TextInput, Alert } from "react-native";
 import { BlurView } from "expo-blur";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./firebase-config";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Navigation from "./Navigation";  
+import Navigation from "./Navigation";
 import { usePushedNotifications } from "./usePushNotifications";
 
-
-
 const uri = "https://i.pinimg.com/564x/1c/80/3e/1c803ed49857e073503c887fb29b5c9b.jpg";
-const profilePicture = "https://i.pinimg.com/564x/41/22/84/4122849bf14714df79a3c154b51ee53e.jpg";
+const profilePicture = 'https://pbs.twimg.com/media/GKxnSSVaoAAVQo4?format=jpg&name=small';
 
 function HomeScreen() {
   return (
@@ -20,42 +18,58 @@ function HomeScreen() {
   );
 }
 
-
 function LoginScreen() {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  
+
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-  const navigation = useNavigation(); // Usar el hook useNavigation para obtener la referencia de navegación
-  // crear cuenta
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    Alert.alert(
+      "Welcome!",
+      "If you don't have an account, please create one first by providing your details and clicking 'Create Account', then proceed to login.",
+      [
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ]
+    );
+  }, []);
+
   const handleCreateAccount = () => {
     createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      console.log(user);
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        Alert.alert(
+          "Success",
+          "Account created successfully!",
+          [
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ]
+        );
       })
       .catch((error) => {
         const errorMessage = error.message;
         console.log(errorMessage);
         Alert.alert("Error", errorMessage);
       });
-    };
-    // iniciar sesión
-    const handleLogin = () => {
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          console.log('Login successful');
-          const user = userCredential.user;
-          console.log(user);
-          navigation.navigate("HomeScreen"); // Navegar a la pantalla HomeScreen
-        })
-        .catch((error) => {
-          const errorMessage = error.message;
-          console.log(errorMessage);
-        });
-    };
-  
+  };
+
+  const handleLogin = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log('Login successful');
+        const user = userCredential.user;
+        console.log(user);
+        navigation.navigate("HomeScreen");
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
+  };
+
   return (
     <View style={styles.container}>
       <Image source={{ uri }} style={[styles.image, StyleSheet.absoluteFill]} />
@@ -67,18 +81,17 @@ function LoginScreen() {
           alignItems: "center",
           justifyContent: "center",
         }}
-        >
+      >
         <BlurView intensity={20}>
           <View style={styles.login}>
             <Image source={{ uri: profilePicture }} style={styles.profile} />
-
             <View>
               <Text style={styles.labelText}>E-Mail</Text>
               <TextInput
                 style={styles.input}
                 placeholder="Akiddor7@gmail.com"
                 onChangeText={(text) => setEmail(text)}
-                />
+              />
             </View>
 
             <View>
@@ -88,7 +101,7 @@ function LoginScreen() {
                 placeholder="Arriba el Mazatlan"
                 secureTextEntry={true}
                 onChangeText={(text) => setPassword(text)}
-                />
+              />
             </View>
 
             <TouchableOpacity onPress={handleLogin} style={[styles.button, { backgroundColor: "#2823bc" }]}>
@@ -106,8 +119,8 @@ function LoginScreen() {
 }
 
 export default function App() {
-const {expoPushToken} = usePushedNotifications()
-console.log(expoPushToken);
+  const { expoPushToken } = usePushedNotifications();
+  console.log(expoPushToken);
 
   const Stack = createNativeStackNavigator();
   return (
@@ -119,7 +132,6 @@ console.log(expoPushToken);
     </NavigationContainer>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {

@@ -1,19 +1,20 @@
-import firebase, { initializeApp } from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/database'; 
-import { getAnalytics } from "firebase/analytics";
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from 'firebase/analytics';
+import { getDatabase, ref, set } from 'firebase/database';
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyCZgf8CY-jVL99XyexkBV3lWnh5LLC4Eys",
-  authDomain: "login-acces-9490a.firebaseapp.com",
-  databaseURL: "https://accessguard-459d3-default-rtdb.firebaseio.com/",
-  projectId: "login-acces-9490a",
-  storageBucket: "login-acces-9490a.appspot.com",
-  messagingSenderId: "215488292373",
-  appId: "1:215488292373:web:3e4c4a85f1708a078fd01c",
-  measurementId: "G-NLT58CR0JT"
+   apiKey: "AIzaSyCVCvedTinyUadvsyHbEoI7hMwypNnGpT4",
+  authDomain: "accessguard-459d3.firebaseapp.com",
+  databaseURL: "https://accessguard-459d3-default-rtdb.firebaseio.com",
+  projectId: "accessguard-459d3",
+  storageBucket: "accessguard-459d3.appspot.com",
+  messagingSenderId: "147602161004",
+  appId: "1:147602161004:web:7d81b2574dd85bf3ed4749",
+  measurementId: "G-PJPJ8GCM1W"
 };
 
-export const app = initializeApp(firebaseConfig);
-export const analytics = getAnalytics(app);
-export default firebase;
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getDatabase(app);
+
+export { app, analytics, db, ref, set };

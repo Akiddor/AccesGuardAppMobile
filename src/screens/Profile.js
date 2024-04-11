@@ -9,8 +9,7 @@ const Profile = () => {
     navigation.navigate('Login'); // Navega a la pantalla de inicio de sesión
   };
 
-  const profilePicture = "https://i.pinimg.com/564x/41/22/84/4122849bf14714df79a3c154b51ee53e.jpg";
-
+  const profilePicture = "https://pbs.twimg.com/media/GKxnSSVaoAAVQo4?format=jpg&name=small";
   return (
     <View style={styles.container}>
       {/* Sección de la foto */}
@@ -25,17 +24,17 @@ const Profile = () => {
       <View style={styles.statsContainer}>
         <View style={styles.state}>
           <Text style={styles.statAmount}>10</Text>
-          <Text style={styles.stateTitle}># Empleados</Text>
+          <Text style={styles.stateTitle}># Employee</Text>
         </View>
       
         <View style={styles.state}>
-          <Text style={styles.statAmount}>10</Text>
-          <Text style={styles.stateTitle}>Entradas</Text>
+          <Text style={styles.statAmount}>Chihuhahua</Text>
+          <Text style={styles.stateTitle}>City</Text>
         </View>
 
         <View style={styles.state}>
-          <Text style={styles.statAmount}>Chihuahua</Text>
-          <Text style={styles.stateTitle}>Sucursal</Text>
+          <Text style={styles.statAmount}>American Acces</Text>
+          <Text style={styles.stateTitle}>Branch</Text>
         </View>
       </View>
 
